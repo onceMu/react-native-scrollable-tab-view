@@ -60,6 +60,7 @@ const ScrollableTabBar = createReactClass({
   },
 
   updateView(offset) {
+    if (offset.value === undefined) {offset.value = 0}
     const position = Math.floor(offset.value);
     const pageOffset = offset.value % 1;
     const tabCount = this.props.tabs.length;
@@ -116,11 +117,11 @@ const ScrollableTabBar = createReactClass({
       const newLineLeft = (pageOffset * nextTabLeft + (1 - pageOffset) * lineLeft);
       const newLineRight = (pageOffset * nextTabRight + (1 - pageOffset) * lineRight);
 
-      this.state._leftTabUnderline.setValue(newLineLeft);
-      this.state._widthTabUnderline.setValue(newLineRight - newLineLeft);
+      this.state._leftTabUnderline.setValue(newLineLeft + (newLineRight - newLineLeft - 20)/2);
+      this.state._widthTabUnderline.setValue(20);
     } else {
-      this.state._leftTabUnderline.setValue(lineLeft);
-      this.state._widthTabUnderline.setValue(lineRight - lineLeft);
+      this.state._leftTabUnderline.setValue(lineLeft + (lineRight - lineLeft -20)/2);
+      this.state._widthTabUnderline.setValue(20);
     }
   },
 
